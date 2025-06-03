@@ -19,9 +19,13 @@
       <v-icon>mdi-cog</v-icon>
     </v-btn>
   </v-app-bar>
+
+  <!-- Navigation Drawer -->
   <v-navigation-drawer
     v-model="drawer"
     app
+    :rail="rail"
+    @click="rail = false"
   >
     <!-- Profile Card -->
     <v-card
@@ -31,12 +35,18 @@
       elevation="0"
     >
       <div class="profile-image px-3 py-10">
-        <v-avatar image="/images/dashboard/baby-avatar.webp"></v-avatar>
+        <v-avatar
+          image="/images/dashboard/baby-avatar.webp"
+          @click.stop="rail = !rail"
+        ></v-avatar>
       </div>
-      <div class="profile-info px-4 d-flex justify-space-between align-center">
+      <div
+        v-if="!rail"
+        class="profile-info px-4 d-flex justify-space-between align-center"
+      >
         <h3 class="name">John Doe</h3>
 
-        <!-- Action Buttons -->
+        <!-- Profile Nav -->
         <v-menu
           transition="slide-y-transition"
         >
@@ -71,8 +81,11 @@
       v-for="nav in dashboardDrawerNav"
       :key="nav.category"
       class="main-nav"
+      density="compact"
+      nav
     >
-      <v-list-subheader>{{ nav.category }}</v-list-subheader>
+      <v-list-subheader v-if="!rail">{{ nav.category }}</v-list-subheader>
+      <v-list-subheader v-else class="ml-2"><v-icon icon="mdi-dots-horizontal"/></v-list-subheader>
       
       <template v-for="(item, index) in nav.items" :key="index">
         <!-- WITHOUT sub-items -->
@@ -115,7 +128,9 @@
 <script setup lang="ts">
 import { profileNav, dashboardDrawerNav } from '@/config/menus';
 const drawer = ref(true);
+const rail = ref(true);
 </script>
+
 <style scoped>
 .main-nav {
   .v-list-subheader {
