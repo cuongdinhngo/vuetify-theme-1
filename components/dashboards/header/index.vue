@@ -15,9 +15,15 @@
     <!-- Search -->
     <dashboards-header-search />
 
+    <!-- Block Menu -->
+    <dashboards-header-block-nav />
+
     <!-- Spacer in between-->
     <v-spacer></v-spacer>
 
+    <v-btn icon>
+      <v-icon>mdi-bell</v-icon>
+    </v-btn>
     <v-btn icon>
       <v-icon>mdi-account</v-icon>
     </v-btn>

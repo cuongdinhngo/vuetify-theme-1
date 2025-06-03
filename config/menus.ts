@@ -132,3 +132,93 @@ export const profileNav = [
     color: 'red-darken-4'
   }
 ];
+
+export const headerNav = [
+  {
+    title: 'Home',
+    subtitle: 'Welcome to our site',
+    icon: 'mdi-home',
+    to: '/',
+    bgColor: 'brown-lighten-4',
+    color: 'brown-darken-3'
+  },
+  {
+    title: 'Products',
+    subtitle: 'Explore our products',
+    icon: 'mdi-cart',
+    to: '/products',
+    bgColor: 'deep-orange-lighten-4',
+    color: 'deep-orange-darken-3'
+  },
+  {
+    title: 'About Us',
+    subtitle: 'Learn more about us',
+    icon: 'mdi-information',
+    to: '/about',
+    bgColor: 'light-green-lighten-4',
+    color: 'light-green-darken-3'
+  },
+  {
+    title: 'Contact',
+    subtitle: 'Get in touch with us',
+    icon: 'mdi-phone',
+    to: '/contact',
+    bgColor: 'teal-lighten-4',
+    color: 'teal-darken-3'
+  },
+  {
+    title: 'Settings',
+    subtitle: 'Adjust your preferences',
+    icon: 'mdi-cog',
+    to: '/settings',
+    bgColor: 'light-blue-lighten-4',
+    color: 'light-blue-darken-3'
+  },
+  {
+    title: 'Help',
+    subtitle: 'Need assistance?',
+    icon: 'mdi-help-circle',
+    to: '/help',
+    bgColor: 'pink-lighten-4',
+    color: 'pink-darken-3'
+  },
+  {
+    title: 'Feedback',
+    subtitle: 'Share your thoughts',
+    icon: 'mdi-comment-text',
+    to: '/feedback',
+    bgColor: 'purple-lighten-4',
+    color: 'purple-darken-3'
+  },
+  {
+    title: 'Support',
+    subtitle: 'Get support',
+    icon: 'mdi-lifebuoy',
+    to: '/support',
+    bgColor: 'amber-lighten-4',
+    color: 'amber-darken-3'
+  }
+];
+
+export const quickLinks = [
+  {
+    title: 'Dashboard',
+    icon: 'mdi-view-dashboard',
+    to: '/dashboard'
+  },
+  {
+    title: 'Reports',
+    icon: 'mdi-chart-bar',
+    to: '/reports'
+  },
+  {
+    title: 'Analytics',
+    icon: 'mdi-chart-line',
+    to: '/analytics'
+  },
+  {
+    title: 'Settings',
+    icon: 'mdi-cog',
+    to: '/settings'
+  }
+];
