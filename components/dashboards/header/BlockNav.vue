@@ -18,7 +18,7 @@
         <v-row>
           <!-- Main Navigation -->
           <v-col cols="12" md="8">
-            <v-list density="compact" class="main-block-nav">
+            <v-list density="compact" nav class="main-block-nav">
               <v-list-item
                 v-for="(item, index) in headerNav"
                 :key="index"
@@ -52,6 +52,7 @@
           <v-col cols="12" md="4">
             <v-list
               density="compact"
+              nav
               class="quick-links-list"
             >
               <v-list-subheader>Quick Links</v-list-subheader>
