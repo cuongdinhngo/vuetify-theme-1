@@ -26,6 +26,6 @@ const imageFiles = [
 
 const getRandomImage = () => {
   const randomIndex = Math.floor(Math.random() * imageFiles.length)
-  return `/imgs/${imageFiles[randomIndex]}`
+  return `/images/products/${imageFiles[randomIndex]}`
 }
 </script>
