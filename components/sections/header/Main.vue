@@ -18,7 +18,7 @@
     <v-btn icon="mdi-cog"></v-btn>
   </v-app-bar>
 
-  <v-navigation-drawer v-model="drawer" temporary app>
+  <v-navigation-drawer v-model="drawer" app>
     <v-list>
       <v-list-item v-for="item in drawerNavItems" :key="item.title" :to="item.to">
         <template #prepend>
