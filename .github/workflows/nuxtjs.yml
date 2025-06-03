@@ -16,7 +16,7 @@ jobs:
           node-version: "20"
       # Pick your own package manager and build script
       - run: npm install
-      - run: NUXT_APP_BASE_URL=/vuetify-theme/ npx nuxt build --preset github_pages
+      - run: NUXT_APP_BASE_URL=/vuetify-theme-1/ npx nuxt build --preset github_pages
         env:
           APP_URL: ${{ secrets.APP_URL }}
       - name: Upload artifact
