@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
   app: {
-    baseURL: '/vuetify-theme'
+    baseURL: '/vuetify-theme-1'
   },
   modules: ['vuetify-nuxt-module'],
   css: [
