@@ -41,13 +41,16 @@
         ></v-avatar>
       </div>
       <div
-        v-if="!rail"
         class="profile-info px-4 d-flex justify-space-between align-center"
       >
-        <h3 class="name">John Doe</h3>
+        <h3
+          class="name"
+          v-if="!rail"
+        >John Doe</h3>
 
         <!-- Profile Nav -->
         <v-menu
+          v-if="!rail"
           transition="slide-y-transition"
         >
           <template v-slot:activator="{ props }">
@@ -85,7 +88,7 @@
       nav
     >
       <v-list-subheader v-if="!rail">{{ nav.category }}</v-list-subheader>
-      <v-list-subheader v-else class="ml-2"><v-icon icon="mdi-dots-horizontal"/></v-list-subheader>
+      <v-list-subheader v-else class="subheader-rail"><v-icon icon="mdi-dots-horizontal"/></v-list-subheader>
       
       <template v-for="(item, index) in nav.items" :key="index">
         <!-- WITHOUT sub-items -->
@@ -95,6 +98,13 @@
         >
           <template v-slot:prepend>
             <v-icon>{{ item.icon }}</v-icon>
+          </template>
+
+          <template
+            v-if="item.counts && !rail"
+            v-slot:append
+          >
+            <v-chip variant="tonal" color="green">{{ item.counts }}</v-chip>
           </template>
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
@@ -138,8 +148,11 @@ const rail = ref(true);
     color: #272727;
     text-transform: uppercase;
   }
+  .subheader-rail {
+    margin-left: 4px;
+  }
   .v-list-item {
-    margin-left: 10px !important;
+    margin-left: 4px !important;
 
     &:hover {
       /* color: #87dce2 !important; */
@@ -159,6 +172,10 @@ by Vuetify's internal structure, bypassing Vue's scoped CSS limitations.
 */
 .main-nav :deep(.v-list-item__prepend > .v-icon ~ .v-list-item__spacer) {
   width: 10px !important;
+}
+
+.profile {
+  min-height: 168px;
 }
 
 .profile-info {

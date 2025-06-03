@@ -84,7 +84,8 @@ export const dashboardDrawerNav = [
       {
         title: 'Chat',
         icon: 'mdi-chat',
-        to: '/dashboard/chat'
+        to: '/dashboard/chat',
+        counts: 10
       },
       {
         title: 'Mail',
