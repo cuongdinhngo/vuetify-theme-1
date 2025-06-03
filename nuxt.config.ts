@@ -7,6 +7,9 @@ export default defineNuxtConfig({
     baseURL: '/vuetify-theme'
   },
   modules: ['vuetify-nuxt-module'],
+  css: [
+    '@/assets/styles/main.scss',
+  ],
   vuetify: {
     moduleOptions: {
       styles: 'sass', // Uses Vuetify’s SASS styles for optimized CSS
