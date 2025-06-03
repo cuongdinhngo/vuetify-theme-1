@@ -11,7 +11,13 @@
     <v-app-bar-nav-icon
       @click="drawer = !drawer"
     />
+
+    <!-- Search -->
+    <dashboards-header-search />
+
+    <!-- Spacer in between-->
     <v-spacer></v-spacer>
+
     <v-btn icon>
       <v-icon>mdi-account</v-icon>
     </v-btn>
