@@ -116,12 +116,18 @@
 <script setup lang="ts">
 import { profileNav, dashboardDrawerNav } from '@/config/menus';
 
-const rail = ref(true);
+const rail = defineModel('rail', {
+  type: Boolean,
+  default: false,
+  required: true
+});
+
 const drawer = defineModel('drawer', {
   type: Boolean,
   default: true,
   required: true
 });
+
 </script>
 <style scoped>
 .main-nav {
