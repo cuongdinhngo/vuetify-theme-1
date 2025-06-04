@@ -21,9 +21,9 @@
     <!-- Spacer in between-->
     <v-spacer></v-spacer>
 
-    <v-btn icon>
-      <v-icon>mdi-bell</v-icon>
-    </v-btn>
+    <!-- Notifications -->
+    <dashboards-header-notification />
+
     <v-btn icon>
       <v-icon>mdi-account</v-icon>
     </v-btn>

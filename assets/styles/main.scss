@@ -1,1 +1,16 @@
 @use 'templates/_nav.scss';
+
+/* Link style */
+.router-link-active,
+.router-link-exact-active,
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:visited,
+a:hover,
+a:active {
+  color: inherit;
+  text-decoration: none;
+}

@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   app: {
     baseURL: '/vuetify-theme-1'
   },
-  modules: ['vuetify-nuxt-module'],
+  modules: ['vuetify-nuxt-module', '@vueuse/nuxt'],
   css: [
     '@/assets/styles/main.scss',
   ],
