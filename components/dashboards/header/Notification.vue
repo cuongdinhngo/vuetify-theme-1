@@ -1,5 +1,5 @@
 <template>
-  <v-menu>
+  <v-menu open-on-hover>
     <template #activator="{ props }">
       <v-btn icon v-bind="props">
         <v-icon>mdi-bell</v-icon>
@@ -21,9 +21,11 @@
             :key="index"
           >
             <template v-slot:prepend>
-              <v-avatar :color="notification.bgColor">
-                <v-icon :color="notification.color">{{ notification.icon }}</v-icon>
-              </v-avatar>
+              <NuxtLink :to="{ name: 'index' }" class="mr-4">
+                <v-avatar :color="notification.bgColor">
+                  <v-icon :color="notification.color">{{ notification.icon }}</v-icon>
+                </v-avatar>
+              </NuxtLink>
             </template>
             <template v-slot:append>
               <span class="text-caption">{{ notification.timestamp }}</span>
