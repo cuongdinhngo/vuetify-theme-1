@@ -24,6 +24,9 @@
     <!-- Notifications -->
     <dashboards-header-notification />
 
+    <!-- Messages -->
+    <dashboards-header-message />
+
     <v-btn icon>
       <v-icon>mdi-account</v-icon>
     </v-btn>
