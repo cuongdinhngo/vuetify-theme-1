@@ -21,6 +21,9 @@
     <!-- Spacer in between-->
     <v-spacer></v-spacer>
 
+    <!-- Locale -->
+    <dashboards-header-locale />
+
     <!-- Notifications -->
     <dashboards-header-notification />
 
