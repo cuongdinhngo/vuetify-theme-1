@@ -25,6 +25,7 @@
             <v-list-item
               :key="lang.code"
               @click="currentLanguage = lang.code"
+              :active="currentLanguage === lang.code"
             >
               <template v-slot:prepend>
                 <v-img
