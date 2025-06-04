@@ -127,7 +127,7 @@ const drawer = defineModel('drawer', {
 .main-nav {
   .v-list-subheader {
     font-weight: bold;
-    color: #272727;
+    color: rgb(var(--v-theme-on-surface));
     text-transform: uppercase;
   }
   .subheader-rail {

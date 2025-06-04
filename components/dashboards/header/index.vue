@@ -27,12 +27,11 @@
     <!-- Messages -->
     <dashboards-header-message />
 
-    <v-btn icon>
-      <v-icon>mdi-account</v-icon>
-    </v-btn>
-    <v-btn icon>
-      <v-icon>mdi-cog</v-icon>
-    </v-btn>
+    <!-- Dark/Light Mode Toggle -->
+    <dashboards-header-toggle-theme />
+
+    <!-- Account -->
+    <dashboards-header-account />
   </v-app-bar>
 
   <!-- Navigation Drawer -->
@@ -41,6 +40,13 @@
   />
 
 </template>
+
 <script setup lang="ts">
 const drawer = ref(true);
 </script>
+
+<style scoped>
+.v-app-bar {
+  padding-right: 20px !important;
+}
+</style>

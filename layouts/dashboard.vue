@@ -11,12 +11,9 @@
     </v-main>
   </v-app>
 </template>
-<script setup>
+<script setup lang="ts">
 </script>
 <style scoped>
-.v-main {
-  background-color: rgb(238, 245, 249, 1); /* Light gray background for the main content */
-}
 .content-container {
   max-width: 1170px !important;
   margin: 0 auto;
