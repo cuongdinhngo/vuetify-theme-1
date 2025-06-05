@@ -17,7 +17,6 @@ export interface Breadcrumb {
 
 export const useBreadcrumbs = () => {
   const breadcrumbs = ref<Breadcrumb[]>([]);
-
   const currentRoute = computed(() => useRoute().name || '');
 
   const updateBreadcrumbs = () => {

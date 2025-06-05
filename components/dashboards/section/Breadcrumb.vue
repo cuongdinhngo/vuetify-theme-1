@@ -19,13 +19,19 @@
   </div>
 </template>
 <script setup lang="ts">
-const { breadcrumbs, updateBreadcrumbs } = useBreadcrumbs();
+const { breadcrumbs, updateBreadcrumbs, currentRoute } = useBreadcrumbs();
 
 onMounted(() => {
   updateBreadcrumbs();
 
   console.log('Breadcrumbs updated:', breadcrumbs.value);
 });
+
+watch(currentRoute, (newRoute) => {
+  updateBreadcrumbs();
+  console.log('Current route changed:', newRoute);
+});
+
 </script>
 <style>
 .breadcrumb-container {
