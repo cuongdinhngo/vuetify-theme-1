@@ -11,7 +11,7 @@
             <v-avatar
               size="150"
               class="my-6"
-              :image="`/images/dashboard/baby-avatar.webp`"
+              :image="dashboardImgPath('baby-avatar.webp')"
               alt="Profile Picture"
             />
             
