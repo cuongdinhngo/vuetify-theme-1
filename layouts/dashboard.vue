@@ -18,8 +18,7 @@
 .content-container {
   max-width: 1170px !important;
   margin: 0 auto;
-  padding: 20px;
   background-color: transparent;
-  min-height: calc(100vh - 64px); /* Adjust based on your app bar height */
+  min-height: calc(100vh - 64px);
 }
 </style> 
