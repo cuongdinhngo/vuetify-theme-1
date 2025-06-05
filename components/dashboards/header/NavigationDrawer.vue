@@ -75,7 +75,7 @@
           @click="drawer = false"
         >
           <template v-slot:prepend>
-            <NuxtLink :to="item.to" class="mr-2">
+            <NuxtLink :to="item.to" class="mr-4">
               <v-icon>{{ item.icon }}</v-icon>
             </NuxtLink>
           </template>
