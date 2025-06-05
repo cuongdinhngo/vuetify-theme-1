@@ -2,6 +2,7 @@
   <v-app>
     <DashboardsHeader />
     <v-main>
+      <DashboardsSectionBreadcrumb />
       <v-container
         class="content-container"
         fluid
@@ -18,7 +19,7 @@
   max-width: 1170px !important;
   margin: 0 auto;
   padding: 20px;
-  background-color: #e99292;
+  background-color: transparent;
   min-height: calc(100vh - 64px); /* Adjust based on your app bar height */
 }
-</style>
+</style> 

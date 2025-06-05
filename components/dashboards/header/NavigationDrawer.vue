@@ -75,7 +75,9 @@
           @click="drawer = false"
         >
           <template v-slot:prepend>
-            <v-icon>{{ item.icon }}</v-icon>
+            <NuxtLink :to="item.to" class="mr-2">
+              <v-icon>{{ item.icon }}</v-icon>
+            </NuxtLink>
           </template>
 
           <template
@@ -84,7 +86,9 @@
           >
             <v-chip variant="tonal" color="green">{{ item.counts }}</v-chip>
           </template>
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
+          <NuxtLink :to="item.to">
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </NuxtLink>
         </v-list-item>
 
         <!-- HAVING sub-items -->
@@ -140,7 +144,6 @@ const drawer = defineModel('drawer', {
     margin-left: 4px;
   }
   .v-list-item {
-    margin-left: 4px !important;
 
     &:hover {
       /* color: #87dce2 !important; */

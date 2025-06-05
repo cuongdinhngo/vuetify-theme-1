@@ -32,23 +32,18 @@ export const dashboardDrawerNav = [
     items: [
       {
         title: 'General',
-        icon: 'mdi-account',
-        to: '/dashboard/profile'
-      },
-      {
-        title: 'Classic',
         icon: 'mdi-view-dashboard',
-        to: '/dashboard/notifications'
+        to: { name: 'dashboards' }
       },
       {
-        title: 'Analytical',
-        icon: 'mdi-chart-line',
-        to: '/dashboard/notifications'
+        title: 'Profile Activity',
+        icon: 'mdi-account-box-multiple',
+        to: { name: 'dashboards-profile-activity' }
       },
       {
-        title: 'Campaign',
-        icon: 'mdi-bullhorn',
-        to: '/dashboard/notifications'
+        title: 'Account Settings',
+        icon: 'mdi-tooltip-account',
+        to: { name: 'dashboards-account-settings' }
       },
       {
         title: 'Front Pages',

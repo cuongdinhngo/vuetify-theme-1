@@ -41,7 +41,7 @@ export default defineNuxtConfig({
               background: '#EEF5F9', // CUSTOM light background
               surface: '#FFFFFF',
               'on-background': '#000000',
-              'on-surface': '#000000',
+              'on-surface': '#3e3d3d',
             }
           },
           dark: {
