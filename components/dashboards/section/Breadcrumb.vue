@@ -37,7 +37,7 @@ watch(currentRoute, (newRoute) => {
 .breadcrumb-container {
   max-width: 1170px !important;
   margin: 0 auto;
-  padding: 20px 20px 0 32px;
+  padding: 20px 32px 0 32px;
   background-color: transparent;
 }
 .v-breadcrumbs {
