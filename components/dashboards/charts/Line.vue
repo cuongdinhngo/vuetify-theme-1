@@ -1,18 +1,50 @@
 <template>
-  <v-card variant="elevated" elevation="3" rounded="md" class="pa-2" height="450">
+  <v-card variant="elevated" elevation="3" rounded="md" class="pa-2" :height="height">
     <v-card-title class="text-h5">Monthy Sales</v-card-title>
     <v-card-text>
-      <canvas id="salesTrendChart"></canvas>
+      <v-skeleton-loader
+        v-if="status === 'pending'"
+        type="image, card"
+      ></v-skeleton-loader>
+      <canvas
+        v-if="status === 'success'"
+        id="salesTrendChart"
+      ></canvas>
     </v-card-text>
   </v-card>
 </template>
 <script setup lang="ts">
 import Chart from 'chart.js/auto';
 
-const { data: salesData } = await useFetch('/api/stats/monthly-sales');
+const props = defineProps({
+  height: {
+    type: [String, Number],
+    default: '450'
+  }
+});
 
-onMounted(() => {
-  const ctx = document.getElementById('salesTrendChart').getContext('2d');
+const { monthlySales } = useStatistics();
+const { data: salesData, status } = await useAsyncData(
+  'monthly-sales',
+  () => monthlySales()
+);
+
+onMounted(() => generateChart());
+
+function generateChart() {
+  const canvas = document.getElementById('salesTrendChart') as HTMLCanvasElement | null;
+
+  if (!canvas) {
+    console.error('Canvas element not found => salesTrendChart');
+    return;
+  }
+
+  const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    console.error('Failed to get canvas context');
+    return;
+  }
+
   new Chart(ctx, {
     type: 'line',
     data: {
@@ -32,7 +64,7 @@ onMounted(() => {
       responsive: true,
       plugins: {
         legend: { position: 'top' },
-        title: { display: true, text: 'Monthly Sales Trend (Past 12 Months)' }
+        title: { display: true, text: 'Monthly Sales Trend (Last 12 Months)' }
       },
       scales: {
         y: {
@@ -45,5 +77,5 @@ onMounted(() => {
       }
     }
   });
-});
+}
 </script>

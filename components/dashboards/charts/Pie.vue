@@ -1,24 +1,56 @@
 <template>
-  <v-card variant="elevated" elevation="3" rounded="md" class="pa-2" height="450">
+  <v-card variant="elevated" elevation="3" rounded="md" class="pa-2" :height="height">
     <v-card-title>Payment Methods Distribution</v-card-title>
     <v-card-subtitle class="text-body-2 text-medium-emphasis">
       Last 12 months
     </v-card-subtitle>
     <v-card-text>
-      <canvas id="paymentMethodsChart"></canvas>
+      <v-skeleton-loader
+        v-if="status === 'pending'"
+        type="image"
+      ></v-skeleton-loader>
+      <canvas
+        v-if="status === 'success'"
+        id="paymentMethodsChart"
+      ></canvas>
     </v-card-text>
   </v-card>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Chart from 'chart.js/auto';
 
-const { data: paymentData } = await useFetch('/api/stats/payments');
+const props = defineProps({
+  height: {
+    type: [String, Number],
+    default: '450'
+  }
+});
 
-onMounted(() => {
-  const ctxPayments = document.getElementById('paymentMethodsChart')?.getContext('2d');
-  if (ctxPayments && paymentData.value) {
-    new Chart(ctxPayments, {
+const { paymentDistribution } = useStatistics();
+
+const { data: paymentData, status } = await useAsyncData(
+  'payment-methods',
+  () => paymentDistribution()
+);
+
+onMounted(() => generateChart());
+
+function generateChart() {
+  const canvas = document.getElementById('paymentMethodsChart') as HTMLCanvasElement | null;
+  if (!canvas) {
+    console.error('Canvas element not found => paymentMethodsChart');
+    return;
+  }
+
+  const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    console.error('Failed to get canvas context');
+    return;
+  }
+
+  if (ctx && paymentData.value) {
+    new Chart(ctx, {
       type: 'pie',
       data: {
         labels: paymentData.value.map(item => item.method),
@@ -44,5 +76,5 @@ onMounted(() => {
       }
     });
   }
-});
+}
 </script>

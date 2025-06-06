@@ -2,10 +2,14 @@
   <v-container>
     <v-row>
       <v-col cols="12" md="8">
-        <DashboardsChartsLine />
+        <DashboardsChartsLine
+          :height="450"
+        />
       </v-col>
       <v-col cols="12" md="4">
-        <DashboardsChartsPie />
+        <DashboardsChartsPie
+          :height="450"
+        />
       </v-col>
     </v-row>
   </v-container>
