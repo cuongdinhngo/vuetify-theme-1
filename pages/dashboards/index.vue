@@ -36,8 +36,35 @@
       <!-- Monthly Sales vs User Visits Chart-->
       <v-col cols="12" md="12">
         <DashboardsChartsMix
-          :height="600"
+          :height="500"
         />
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <!-- Top Saler Table-->
+      <v-col cols="12" md="9">
+        <DashboardsChartsDataTable
+          :height="450"
+        />
+      </v-col>
+
+      <!-- User Visits Chart-->
+      <v-col cols="12" md="3">
+        <v-row>
+          <v-col cols="12">
+            <DashboardsChartsDailyCard
+              :height="210"
+            />
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="12">
+            <DashboardsChartsWeeklyCard
+              :height="210"
+            />
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
   </v-container>
