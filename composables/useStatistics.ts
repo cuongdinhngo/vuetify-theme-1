@@ -12,7 +12,6 @@ interface MonthlySales {
 }
 
 export const useStatistics = () => {
-
   const currentDate = new Date();
 
   const monthlySales = () => {
@@ -91,10 +90,52 @@ export const useStatistics = () => {
     return categoryData;
   }
 
+  const topSeller = () => {
+    const sellers = Array.from({ length: 10 }, () => ({
+      avatar: faker.image.avatar(),
+      fullName: faker.person.fullName(),
+      position: faker.person.jobTitle(),
+      saleCounts: faker.number.int({ min: 50, max: 500 }),
+      revenue: parseFloat(faker.commerce.price({ min: 10000, max: 100000, dec: 2 }))
+    }));
+    return sellers;
+  }
+
+  const dailySales = () => {
+    const dailySales = [];
+    for (let i = 6; i >= 0; i--) {
+      const date = new Date(currentDate);
+      date.setDate(currentDate.getDate() - i);
+      dailySales.push({
+        day: date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }),
+        count: faker.number.int({ min: 10, max: 100 })
+      });
+    }
+    return dailySales;
+  }
+
+  const weeklyRevenue = () => {
+    const weeklyRevenue = [];
+    for (let i = 7; i >= 0; i--) {
+      const startDate = new Date(currentDate);
+      startDate.setDate(currentDate.getDate() - (i * 7) - 6);
+      const endDate = new Date(currentDate);
+      endDate.setDate(currentDate.getDate() - (i * 7));
+      weeklyRevenue.push({
+        week: `Week ${8 - i}: ${startDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${endDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`, // e.g., "Week 1: Apr 13 - Apr 19"
+        revenue: parseFloat(faker.commerce.price({ min: 5000, max: 25000, dec: 2 }))
+      });
+    }
+    return weeklyRevenue;
+  }
+
   return {
     monthlySales,
     paymentDistribution,
     userVisits,
-    categoriesDistribution
+    categoriesDistribution,
+    topSeller,
+    dailySales,
+    weeklyRevenue
   }
 }
