@@ -36,7 +36,7 @@
       <!-- Monthly Sales vs User Visits Chart-->
       <v-col cols="12" md="12">
         <DashboardsChartsMix
-          :height="500"
+          :height="600"
         />
       </v-col>
     </v-row>
