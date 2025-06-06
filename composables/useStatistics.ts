@@ -114,6 +114,19 @@ export const useStatistics = () => {
     return dailySales;
   }
 
+  const dailyRevenue = () => {
+    const dailyRevenue = [];
+    for (let i = 6; i >= 0; i--) {
+      const date = new Date(currentDate);
+      date.setDate(currentDate.getDate() - i);
+      dailyRevenue.push({
+        day: date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }),
+        count: faker.number.int({ min: 1000, max: 10000 })
+      });
+    }
+    return dailyRevenue;
+  }
+
   const weeklyRevenue = () => {
     const weeklyRevenue = [];
     for (let i = 7; i >= 0; i--) {
@@ -136,6 +149,7 @@ export const useStatistics = () => {
     categoriesDistribution,
     topSeller,
     dailySales,
-    weeklyRevenue
+    weeklyRevenue,
+    dailyRevenue
   }
 }

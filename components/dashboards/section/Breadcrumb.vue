@@ -9,12 +9,15 @@
       </v-breadcrumbs>
     </div>
 
-    <div class="breadcrumb-right">
-      <v-breadcrumbs :items="breadcrumbs">
-        <template v-slot:divider>
-          <v-icon icon="mdi-chevron-right"></v-icon>
-        </template>
-      </v-breadcrumbs>
+    <div class="breadcrumb-right d-flex justify-space-between ga-4">
+      <DashboardsSectionYesterdayRevenue
+        height="50"
+        width="180"
+      />
+      <DashboardsSectionYesterdaySale
+        height="50"
+        width="170"
+      />
     </div>
   </div>
 </template>
