@@ -13,9 +13,10 @@ interface MonthlySales {
 
 export const useStatistics = () => {
 
+  const currentDate = new Date();
+
   const monthlySales = () => {
     const salesData = [];
-    const currentDate = new Date();
     for (let i = 11; i >= 0; i--) {
       const date = new Date(currentDate.getFullYear(), currentDate.getMonth() - i, 1);
       salesData.push({
@@ -30,7 +31,6 @@ export const useStatistics = () => {
   const paymentDistribution = () => {
     const paymentMethods = ['Credit Card', 'PayPal', 'Bank Transfer', 'Cash on Delivery'];
     const payments = [] as MonthlySales[];
-    const currentDate = new Date();
 
     for (let i = 11; i >= 0; i--) {
       const date = new Date(currentDate.getFullYear(), currentDate.getMonth() - i, 1);
@@ -59,8 +59,42 @@ export const useStatistics = () => {
     return aggregatedData;
   }
 
+  const userVisits = () => {
+    const visitData = [];
+    for (let i = 11; i >= 0; i--) {
+      const date = new Date(currentDate.getFullYear(), currentDate.getMonth() - i, 1);
+      const desktop = faker.number.int({ min: 1000, max: 5000 });
+      const mobile = faker.number.int({ min: 2000, max: 8000 });
+      const tablet = faker.number.int({ min: 500, max: 2000 });
+      const total = desktop + mobile + tablet;
+      visitData.push({
+        month: date.toLocaleDateString('en-US', formatOption),
+        total,
+        desktop,
+        mobile,
+        tablet,
+      });
+    }
+
+    return visitData;
+  }
+
+  const categoriesDistribution = () => {
+    const categories = ['Electronics', 'Clothing', 'Home & Garden', 'Books'];
+    const categoryData = categories.map(category => ({
+      category,
+      totalRevenue: parseFloat(
+        faker.commerce.price({ min: 50000, max: 200000, dec: 2 })
+      )
+    }));
+
+    return categoryData;
+  }
+
   return {
     monthlySales,
-    paymentDistribution
+    paymentDistribution,
+    userVisits,
+    categoriesDistribution
   }
 }
