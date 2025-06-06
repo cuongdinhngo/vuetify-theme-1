@@ -1,6 +1,6 @@
 <template>
   <v-card variant="elevated" elevation="3" rounded="md" class="pa-2" :height="height">
-    <v-card-title class="text-h5">User Visits</v-card-title>
+    <v-card-title class="text-h6">User Visits</v-card-title>
     <v-card-text>
       <v-skeleton-loader
         v-if="status === 'pending'"

@@ -1,6 +1,6 @@
 <template>
   <v-card variant="elevated" elevation="3" rounded="md" class="pa-2" :height="height">
-    <v-card-title>Payment Methods Distribution</v-card-title>
+    <v-card-title class="text-h6">Payment Methods Distribution</v-card-title>
     <v-card-subtitle class="text-body-2 text-medium-emphasis">
       Last 12 months
     </v-card-subtitle>

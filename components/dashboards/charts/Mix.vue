@@ -1,6 +1,6 @@
 <template>
   <v-card variant="elevated" elevation="3" rounded="md" class="pa-2" :height="height">
-    <v-card-title class="text-h5">Monthly Sales vs User Visits</v-card-title>
+    <v-card-title class="text-h6">Monthly Sales vs User Visits</v-card-title>
     <v-card-text>
       <canvas
         id="mixChart"
