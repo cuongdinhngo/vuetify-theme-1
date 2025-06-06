@@ -72,34 +72,54 @@ export const dashboardDrawerNav = [
     category: 'Apps',
     items: [
       {
-        title: 'Calendar',
-        icon: 'mdi-calendar',
-        to: '/dashboard/calendar'
+        title: 'Contacts',
+        icon: 'mdi-account-multiple',
+        to: { name: 'dashboards-contacts' }
       },
       {
         title: 'Chat',
         icon: 'mdi-chat',
-        to: '/dashboard/chat',
+        to: { name: 'dashboards-chat' },
         counts: 10
       },
       {
         title: 'Mail',
         icon: 'mdi-email',
-        to: '/dashboard/mail'
+        to: { name: 'dashboards-mail' },
       },
       {
-        title: 'Tasks',
-        icon: 'mdi-format-list-bulleted',
+        title: 'Invoices',
+        icon: 'mdi-file-document',
+        to: { name: 'dashboards-invoices' },
+      },
+      {
+        title: 'Notes',
+        icon: 'mdi-note-text',
+        to: { name: 'dashboards-notes' },
+      },
+      {
+        title: 'Projects',
+        icon: 'mdi-briefcase',
         subItems: [
+          {
+            title: 'Project List',
+            icon: 'mdi-format-list-bulleted',
+            to: { name: 'dashboards-projects' }
+          },
+          {
+            title: 'Kanban Board',
+            icon: 'mdi-view-dashboard-variant',
+            to: { name: 'dashboards-projects-kanban' }
+          },
           {
             title: 'Task List',
             icon: 'mdi-format-list-bulleted',
-            to: '/dashboard/tasks/list'
+            to: { name: 'dashboards-projects-tasks' }
           },
           {
-            title: 'Task Board',
-            icon: 'mdi-view-dashboard-variant',
-            to: '/dashboard/tasks/board'
+            title: 'Calendar',
+            icon: 'mdi-calendar',
+            to: { name: 'dashboards-projects-calendar' }
           }
         ]
       }

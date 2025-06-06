@@ -99,9 +99,14 @@
           <template v-slot:activator="{ props }">
             <v-list-item
               v-bind="props"
-              :prepend-icon="item.icon"
-              :title="item.title"
-            />
+            >
+              <template v-slot:prepend>
+                <NuxtLink class="mr-4">
+                  <v-icon>{{ item.icon }}</v-icon>
+                </NuxtLink>
+              </template>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item>
           </template>
 
           <v-list-item
@@ -110,7 +115,9 @@
             :value="subItem.title"
             @click="drawer = false"
           >
-            <v-list-item-title>{{ subItem.title }}</v-list-item-title>
+            <NuxtLink :to="subItem.to">
+              <v-list-item-title>{{ subItem.title }}</v-list-item-title>
+            </NuxtLink>
           </v-list-item>
         </v-list-group>
       </template>
