@@ -19,10 +19,81 @@
         variant="tonal"
         color="primary"
         class="text-none"
+        id="add-contact-dialog"
       >
         Add contact
       </v-btn>
     </v-card-title>
+
+    <!-- Dialog for adding a new contact -->
+    <v-dialog activator="#add-contact-dialog" max-width="600">
+      <template v-slot:default="{ isActive }">
+        <v-card>
+          <v-card-title class="bg-primary text-white text-h6">
+            <v-icon class="me-2">mdi-account-plus</v-icon>
+            <span>Add a new contact</span>
+          </v-card-title>
+          <v-card-text>
+            <v-form>
+              <v-row>
+                <v-col cols="12" md="6">
+                  <v-text-field
+                    label="Full Name"
+                    variant="outlined"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" md="6">
+                  <v-text-field
+                    label="Email"
+                    variant="outlined"
+                    required
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" md="6">
+                  <v-text-field
+                    label="Phone"
+                    variant="outlined"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" md="6">
+                  <v-text-field
+                    label="Address"
+                    variant="outlined"
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" md="12">
+                  <v-select
+                    label="Role"
+                    variant="outlined"
+                    :items="['Admin', 'User', 'Guest']"
+                    required
+                  ></v-select>
+                </v-col>
+              </v-row>
+            </v-form>
+          </v-card-text>
+          <template v-slot:actions>
+            <v-btn
+              variant="tonal"
+              class="ml-auto"
+              text="Close"
+              @click="isActive.value = false"
+            ></v-btn>
+            <v-btn
+              variant="tonal"
+              color="primary"
+              text="Save"
+              @click="isActive.value = false"
+            ></v-btn>
+          </template>
+        </v-card>
+      </template>
+    </v-dialog>
 
     <v-card-text>
       <v-skeleton-loader
@@ -88,14 +159,18 @@
       </template>
 
       <template v-slot:bottom>
+        <!-- Pagination -->
         <div class="text-center pt-2">
           <v-pagination
+            class="mx-auto"
             v-model="page"
             :length="accounts.count"
+            size="small"
+            :total-visible="7"
           ></v-pagination>
         </div>
       </template>
-    </v-data-table>
+      </v-data-table>
     </v-card-text>
   </v-card>
 </template>
