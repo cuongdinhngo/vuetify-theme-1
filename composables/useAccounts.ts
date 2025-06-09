@@ -22,7 +22,36 @@ export const useAccounts = () => {
     }
   }
 
+  const getChatWithLastMessage = () => {
+    return Array.from({ length: 10 }, () => ({
+      id: faker.number.int({ min: 1000, max: 9999 }),
+      fullName: faker.person.fullName(),
+      avatar: faker.image.avatar(),
+      lastMessage: faker.lorem.sentence(),
+      lastMessageTime: faker.date.recent().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+      isOnline: faker.datatype.boolean(),
+    }));
+  }
+
+  const getMessagesByAccountId = (accountId: number = 9999) => {
+    return Array.from({ length: 20 }, () => {
+      const randomId = faker.number.int({ min: 1000, max: 9998 });
+      const isSender9999 = faker.datatype.boolean();
+
+      return {
+        id: faker.number.int({ min: 1000, max: 9999 }),
+        senderId: isSender9999 ? 9999 : randomId,
+        receiverId: isSender9999 ? randomId : 9999,
+        content: faker.lorem.sentence({ min: 1, max: 3 }),
+        timestamp: faker.date.recent().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+        isRead: faker.datatype.boolean()
+      }
+    });
+  }
+
   return {
     getAccounts,
+    getChatWithLastMessage,
+    getMessagesByAccountId
   }
 }
