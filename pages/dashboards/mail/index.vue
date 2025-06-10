@@ -25,7 +25,7 @@
           <template #prepend>
             <v-icon>{{ index === 0 ? 'mdi-inbox' : index === 1 ? 'mdi-send' : index === 2 ? 'mdi-file-document' : index === 3 ? 'mdi-alert-octagon' : 'mdi-delete' }}</v-icon>
           </template>
-          <v-list-title class="ml-2 text-subtitle-2">{{ item }}</v-list-title>
+          <v-list-item-title class="ml-2 text-subtitle-2">{{ item }}</v-list-item-title>
         </v-list-item>
       </v-list>
 
@@ -41,7 +41,7 @@
           <template #prepend>
             <v-icon>{{ index === 0 ? 'mdi-briefcase' : index === 1 ? 'mdi-account' : index === 2 ? 'mdi-star' : 'mdi-account-group' }}</v-icon>
           </template>
-          <v-list-title class="ml-2 text-subtitle-2">{{ label }}</v-list-title>
+          <v-list-item-title class="ml-2 text-subtitle-2">{{ label }}</v-list-item-title>
         </v-list-item>
       </v-list>
 
@@ -57,7 +57,7 @@
           <template #prepend>
             <v-icon>{{ index === 0 ? 'mdi-briefcase' : index === 1 ? 'mdi-account' : index === 2 ? 'mdi-star' : 'mdi-account-group' }}</v-icon>
           </template>
-          <v-list-title class="ml-2 text-subtitle-2">{{ label }}</v-list-title>
+          <v-list-item-title class="ml-2 text-subtitle-2">{{ label }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -82,16 +82,22 @@
         </div>
 
         <!-- Email List -->
-        <div class="email-list mt-4">
+        <div class="wrapper email-list mt-4">
           <v-virtual-scroll
             v-if="status === 'success'"
             :items="emails"
             height="600"
           >
             <template #default="{ item: email }">
-              <div class="email-item" @click="rightDrawer = !rightDrawer">
+              <div class="email-item" @click="showDetails(email)" :key="email.id">
                 <div class="item-header d-flex align-center">
-                  <v-checkbox hide-details density="comfortable"></v-checkbox>
+                  <v-checkbox
+                    hide-details
+                    density="comfortable"
+                    v-model="selectedEmails"
+                    @change="showSeletedEmails"
+                    :value="email.id"
+                  ></v-checkbox>
                   <span class="text-subtitle-2 font-weight-bold text-grey-darken-1">{{ email.fullName }}</span>
                   <v-chip color="primary" size="small" class="ml-auto">{{ email.label }}</v-chip>
                 </div>
@@ -189,6 +195,7 @@ import { useDisplay } from 'vuetify'
 
 const menuDrawer = ref(false);
 const rightDrawer = ref(false);
+const selectedEmails = ref([])
 const { smAndUp } = useDisplay();
 
 const { getMails } = useMails();
@@ -197,6 +204,18 @@ const { data:emails, error, status } = useAsyncData(
   'mails',
   () => getMails()
 );
+
+function showDetails(email: Mail) {
+  if (!smAndUp.value) {
+    rightDrawer.value = true;
+  }
+  
+  console.log('Email details:', email);
+}
+
+function showSeletedEmails() {
+  console.log('Selected emails:', selectedEmails.value);
+}
 
 watch(
   smAndUp,
