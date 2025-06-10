@@ -99,7 +99,7 @@
                     :value="email.id"
                   ></v-checkbox>
                   <span class="text-subtitle-2 font-weight-bold text-grey-darken-1">{{ email.fullName }}</span>
-                  <v-chip color="primary" size="small" class="ml-auto">{{ email.label }}</v-chip>
+                  <v-chip color="primary" size="small" class="ml-auto" variant="flat">{{ email.label }}</v-chip>
                 </div>
                 <div class="item-content text-grey-darken-1 pl-9">
                   <p class="text-caption text-truncate">{{ email.content }}</p>
@@ -143,7 +143,7 @@
           class="py-4"
         >
           <template #append>
-            <v-chip color="primary" size="small">Promotions</v-chip>
+            <v-chip color="primary" size="small" variant="flat">Promotions</v-chip>
           </template>
         </v-list-item>
         <v-card tile class="my-2" color="white" elevation="0">
