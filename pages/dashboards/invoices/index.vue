@@ -128,7 +128,7 @@
   </v-card>
 </template>
 <script setup lang="ts">
-import { color } from 'chart.js/helpers';
+import { faker } from '@faker-js/faker';
 
 definePageMeta({
   layout: 'dashboard',
@@ -145,28 +145,28 @@ const invoiceCategories = [
   {
     title: 'Total',
     icon: 'mdi-cash-multiple',
-    count: 1000,
+    count: faker.number.int({ min: 1000, max: 5000 }),
     color: 'blue-darken-2',
     bgColor: 'blue-lighten-5'
   },
   {
     title: 'Paid',
     icon: 'mdi-check-circle',
-    count: 0,
+    count: faker.number.int({ min: 100, max: 1000 }),
     color: 'green-darken-2',
     bgColor: 'green-lighten-5'
   },
   {
     title: 'Unpaid',
     icon: 'mdi-alert-circle',
-    count: 0,
+    count: faker.number.int({ min: 100, max: 2000 }),
     color: 'purple-darken-2',
     bgColor: 'purple-lighten-5'
   },
   {
     title: 'Overdue',
     icon: 'mdi-clock-alert',
-    count: 0,
+    count: faker.number.int({ min: 100, max: 1000 }),
     color: 'amber-darken-2',
     bgColor: 'amber-lighten-5'
   }
