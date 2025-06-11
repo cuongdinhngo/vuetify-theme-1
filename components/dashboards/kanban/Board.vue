@@ -41,7 +41,7 @@
             <v-card-text class="px-2 text-caption">{{ task.description }}</v-card-text>
 
             <v-divider></v-divider>
-            <v-card-title class="px-0 text-black">
+            <v-card-title class="px-0 grey-darken-4">
               <v-list-item
                 :prepend-avatar="task.owner_avatar"
                 :title="task.owner"
