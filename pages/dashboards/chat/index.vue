@@ -185,8 +185,8 @@
               <v-card-actions class="">
                 <v-text-field
                   placeholder="Type your message..."
-                  variant="text"
                   hide-details
+                  variant="outlined"
                 ></v-text-field>
 
                 <v-btn

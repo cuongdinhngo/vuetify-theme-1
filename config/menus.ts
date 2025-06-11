@@ -94,18 +94,13 @@ export const dashboardDrawerNav = [
       },
       {
         title: 'Notes',
-        icon: 'mdi-note-text',
+        icon: 'mdi-book-multiple',
         to: { name: 'dashboards-notes' },
       },
       {
         title: 'Projects',
         icon: 'mdi-briefcase',
         subItems: [
-          {
-            title: 'Project List',
-            icon: 'mdi-format-list-bulleted',
-            to: { name: 'dashboards-projects' }
-          },
           {
             title: 'Kanban Board',
             icon: 'mdi-view-dashboard-variant',
