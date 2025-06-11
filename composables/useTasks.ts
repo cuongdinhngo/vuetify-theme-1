@@ -21,7 +21,7 @@ export const useTasks = () => {
 
   const getTasks = (count = 10): Task[] => {
     return Array.from({ length: count }).map(() => {
-      const avatarNum = faker.number.int({ min: 0, max: 10 })
+      const avatarNum = faker.number.int({ min: 0, max: 9 })
       return {
         id: faker.number.int({ min: 1000, max: 9999 }),
         title: faker.lorem.sentence(),
