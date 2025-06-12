@@ -1,30 +1,5 @@
 <template>
   <v-card variant="flat" class="pa-2">
-    <v-card-title class="d-flex align-center pe-2 text-h6">
-      <v-text-field
-        v-model="search"
-        density="compact"
-        label="Search"
-        prepend-inner-icon="mdi-magnify"
-        variant="outlined"
-        flat
-        hide-details
-        single-line
-      ></v-text-field>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        prepend-icon="mdi-account-plus"
-        variant="tonal"
-        color="primary"
-        class="text-none"
-        id="add-contact-dialog"
-      >
-        Add contact
-      </v-btn>
-    </v-card-title>
-
     <!-- Dialog for adding a new contact -->
     <v-dialog activator="#add-contact-dialog" max-width="600">
       <template v-slot:default="{ isActive }">
@@ -113,63 +88,93 @@
         :items-per-page="itemsPerPage"
       >
 
-      <template v-slot:item.id="{ item }">
-        <span class="text-subtitle-1">#{{ item.id }}</span>
-      </template>
+        <!-- Table Header -->
+        <template v-slot:top>
+          <dashboards-section-data-table-top>
+            <template v-slot:left>
+              <v-text-field
+                v-model="search"
+                variant="outlined"
+                placeholder="Search Contacts"
+                prepend-inner-icon="mdi-magnify"
+                density="compact"
+                hide-details
+              ></v-text-field>
+            </template>
 
-      <template v-slot:item.fullName="{ item }">
-        <div class="d-flex align-center my-3">
-          <v-avatar size="32" class="me-4" :image="item.avatar"></v-avatar>
-          <div>
-            <div class="text-subtitle-1">{{ item.fullName }}</div>
-            <div class="text-caption text-secondary">{{ item.email }}</div>
+            <template v-slot:right>
+              <v-btn
+                prepend-icon="mdi-account-plus"
+                variant="tonal"
+                color="primary"
+                class="text-none"
+                id="add-contact-dialog"
+              >Add contact</v-btn>
+            </template>
+          </dashboards-section-data-table-top>
+        </template>
+
+        <template v-slot:item.id="{ item }">
+          <span class="text-subtitle-1">#{{ item.id }}</span>
+        </template>
+
+        <template v-slot:item.fullName="{ item }">
+          <div class="d-flex align-center my-3">
+            <v-avatar size="32" class="me-4" :image="item.avatar"></v-avatar>
+            <div>
+              <div class="text-subtitle-1">{{ item.fullName }}</div>
+              <div class="text-caption text-secondary">{{ item.email }}</div>
+            </div>
           </div>
-        </div>
-      </template>
+        </template>
 
-      <template v-slot:item.role="{ item }">
-        <v-chip :color="getRandomChipColor()">{{ item.role }}</v-chip>
-      </template>
+        <template v-slot:item.role="{ item }">
+          <v-chip :color="getRandomChipColor()">{{ item.role }}</v-chip>
+        </template>
 
-      <template v-slot:item.action="{ item }">
-        <v-btn
-          variant="text"
-          color="primary"
-          class="text-none"
-          icon
-        >
-          <v-icon>mdi-pencil</v-icon>
-          <v-tooltip
-            activator="parent"
-            location="top"
-          >Edit</v-tooltip>
-        </v-btn>
-        <v-btn
-          variant="text"
-          color="error"
-          class="text-none"
-          icon
-        >
-          <v-icon>mdi-delete-outline</v-icon>
-          <v-tooltip
-            activator="parent"
-            location="top"
-          >Delete</v-tooltip>
-        </v-btn>
-      </template>
+        <template v-slot:item.action="{ item }">
+          <v-btn
+            variant="text"
+            color="primary"
+            class="text-none"
+            icon
+          >
+            <v-icon>mdi-pencil</v-icon>
+            <v-tooltip
+              activator="parent"
+              location="top"
+            >Edit</v-tooltip>
+          </v-btn>
+          <v-btn
+            variant="text"
+            color="error"
+            class="text-none"
+            icon
+          >
+            <v-icon>mdi-delete-outline</v-icon>
+            <v-tooltip
+              activator="parent"
+              location="top"
+            >Delete</v-tooltip>
+          </v-btn>
+        </template>
 
-      <template v-slot:bottom>
-        <!-- Pagination -->
-        <div class="text-center pt-2">
-          <v-pagination
-            class="mx-auto"
-            v-model="page"
-            :length="accounts.count"
-            size="small"
-            :total-visible="7"
-          ></v-pagination>
-        </div>
-      </template>
+        <!-- No Data -->
+        <template v-slot:no-data>
+          <v-alert
+            type="info"
+            class="mt-4"
+          >No contacts found.</v-alert>
+        </template>
+
+        <!-- Bottom Section -->
+        <template v-slot:bottom>
+          <dashboards-section-data-table-bottom
+            :totalCount="accounts.count"
+            v-model:pageSize="itemsPerPage"
+            v-model:page="page"
+          ></dashboards-section-data-table-bottom>
+        </template>
       </v-data-table>
     </v-card-text>
   </v-card>

@@ -9,41 +9,17 @@
           md="3"
           class="d-flex justify-center"
         >
-            <v-list-item
-              :class="['rounded-lg', `bg-${category.bgColor}`]"
-              min-width="220"
-            >
-              <template v-slot:prepend>
-                <v-avatar
-                  rounded="0"
-                  :color="category.bgColor"
-                >
-                  <v-icon :color="category.color" size="x-large">{{ category.icon }}</v-icon>
-                </v-avatar>
-              </template>
-              <v-list-item-title class="text-h6">{{ category.title }}</v-list-item-title>
-              <v-list-item-subtitle class="text-subtitle-1">{{ category.count }} invoices</v-list-item-subtitle>
-            </v-list-item>
+          <OverviewBadge
+            :title="category.title"
+            :subTitle="category.count"
+            :icon="category.icon"
+            :bgColor="category.bgColor"
+            :color="category.color"
+            unitLabel="invoices"
+          ></OverviewBadge>
         </v-col>
       </v-row>
     </div>
-
-    <!-- Table Header-->
-    <v-card-title class="d-flex align-center">
-      <v-text-field
-        variant="filled"
-        label="Search Invoices"
-        prepend-inner-icon="mdi-magnify"
-        single-line
-        hide-details
-        width="50"
-      ></v-text-field>
-      <v-spacer></v-spacer>
-      <v-btn
-        color="primary"
-        class="text-none"
-      >Create Invoice</v-btn>
-    </v-card-title>
 
     <!-- Table Content -->
     <v-card-text>
@@ -53,6 +29,30 @@
         :items="invoices.data"
         class="elevation-1"
       >
+        <!-- Table Header-->
+        <template v-slot:top>
+          <DataTableTop>
+            <template v-slot:left>
+              <v-text-field
+                v-model="search"
+                variant="outlined"
+                placeholder="Search Invoices"
+                prepend-inner-icon="mdi-magnify"
+                density="compact"
+                hide-details
+              ></v-text-field>
+            </template>
+
+            <template v-slot:right>
+              <v-btn
+                color="primary"
+                class="text-none"
+                id="create-invoice-dialog"
+              >Create Invoice</v-btn>
+            </template>
+          </DataTableTop>
+        </template>
+
         <template v-slot:item.status="{ item }">
           <v-chip
             :color="invoiceStatus.find(status => status.label === item.status)?.bgColor"
@@ -105,23 +105,11 @@
         </template> 
 
         <template v-slot:bottom>
-          <div class="d-flex justify-end align-center pt-2">
-            <span class="mr-2">Items per page:</span>
-            <v-select
-              v-model="pageSize"
-              :items="[5, 10, 15, 20]"
-              variant="outlined"
-              hide-details
-              density="compact"
-              class="my-4 pageSize-select"
-            ></v-select>
-            <v-pagination
-              v-model="page"
-              :length="invoices.count"
-              size="small"
-              :total-visible="7"
-            ></v-pagination>
-          </div>
+          <dashboard-section-data-table-bottom
+            :totalCount="invoices.count"
+            v-model:pageSize="pageSize"
+            v-model:page="page"
+          ></dashboard-section-data-table-bottom>
         </template>
       </v-data-table>
     </v-card-text>
@@ -129,6 +117,8 @@
 </template>
 <script setup lang="ts">
 import { faker } from '@faker-js/faker';
+import DataTableTop from '~/components/dashboards/section/DataTableTop.vue';
+import OverviewBadge from '~/components/dashboards/section/OverviewBadge.vue';
 
 definePageMeta({
   layout: 'dashboard',
@@ -139,6 +129,7 @@ definePageMeta({
   ]
 });
 
+const { mdAndDown } = useDisplay();
 const { getInvoices } = useInvoices();
 
 const invoiceCategories = [
@@ -198,9 +189,3 @@ const { data:invoices, error, status } = useAsyncData(
   () => getInvoices(),
 ); 
 </script>
-<style scoped>
-.pageSize-select {
-  max-width: 100px;
-  min-width: 50px;
-}
-</style>

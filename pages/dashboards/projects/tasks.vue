@@ -9,41 +9,17 @@
           md="3"
           class="d-flex justify-center"
         >
-            <v-list-item
-              :class="['rounded-lg', `bg-${category.bgColor}`]"
-              min-width="220"
-            >
-              <template v-slot:prepend>
-                <v-avatar
-                  rounded="0"
-                  :color="category.bgColor"
-                >
-                  <v-icon :color="category.color" size="x-large">{{ category.icon }}</v-icon>
-                </v-avatar>
-              </template>
-              <v-list-item-title class="text-h6">{{ category.title }}</v-list-item-title>
-              <v-list-item-subtitle class="text-subtitle-1">{{ category.count }} tasks</v-list-item-subtitle>
-            </v-list-item>
+          <OverviewBadge
+            :title="category.title"
+            :subTitle="category.count"
+            :icon="category.icon"
+            :bgColor="category.bgColor"
+            :color="category.color"
+            unitLabel="tasks"
+          ></OverviewBadge>
         </v-col>
       </v-row>
     </div>
-
-    <!-- Table Header-->
-    <v-card-title class="d-flex align-center">
-      <v-text-field
-        variant="filled"
-        label="Search Task"
-        prepend-inner-icon="mdi-magnify"
-        single-line
-        hide-details
-        width="50"
-      ></v-text-field>
-      <v-spacer></v-spacer>
-      <v-btn
-        color="primary"
-        class="text-none"
-      >Create Task</v-btn>
-    </v-card-title>
 
     <!-- Table Content -->
     <v-card-text>
@@ -53,6 +29,31 @@
         :items="tasks.data"
         class="elevation-1"
       >
+        <!-- Table Header-->
+        <template v-slot:top>
+          <dashboards-section-data-table-top>
+            <template v-slot:left>
+              <v-text-field
+                v-model="search"
+                variant="filled"
+                placeholder="Search Tasks"
+                prepend-inner-icon="mdi-magnify"
+                density="compact"
+                hide-details
+              ></v-text-field>
+            </template>
+
+            <template v-slot:right>
+              <v-btn
+                color="primary"
+                class="text-none"
+                id="create-task-dialog"
+                prepend-icon="mdi-plus"
+              >Create Task</v-btn>
+            </template>
+          </dashboards-section-data-table-top>
+        </template>
+
         <template v-slot:item.title="{ item }">
           <v-list-item max-width="300" class="ma-0 pa-0">
             <v-list-item-title class="text-truncate">{{ item.title }}</v-list-item-title>
@@ -116,23 +117,11 @@
         </template> 
 
         <template v-slot:bottom>
-          <div class="d-flex justify-end align-center pt-2">
-            <span class="mr-2">Items per page:</span>
-            <v-select
-              v-model="pageSize"
-              :items="[5, 10, 15, 20]"
-              variant="outlined"
-              hide-details
-              density="compact"
-              class="my-4 pageSize-select"
-            ></v-select>
-            <v-pagination
-              v-model="page"
-              :length="tasks.count"
-              size="small"
-              :total-visible="7"
-            ></v-pagination>
-          </div>
+          <dashboards-section-data-table-bottom
+            :totalCount="tasks.count"
+            v-model:pageSize="pageSize"
+            v-model:page="page"
+          ></dashboards-section-data-table-bottom>
         </template>
       </v-data-table>
     </v-card-text>
@@ -140,6 +129,8 @@
 </template>
 <script setup lang="ts">
 import { faker } from '@faker-js/faker';
+
+import OverviewBadge from '~/components/dashboards/section/OverviewBadge.vue';
 
 definePageMeta({
   layout: 'dashboard',
