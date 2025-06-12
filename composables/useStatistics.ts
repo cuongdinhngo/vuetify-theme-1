@@ -91,7 +91,7 @@ export const useStatistics = () => {
   }
 
   const topSeller = () => {
-    const sellers = Array.from({ length: 10 }, () => ({
+    const sellers = Array.from({ length: 5 }, () => ({
       avatar: faker.image.avatar(),
       fullName: faker.person.fullName(),
       position: faker.person.jobTitle(),

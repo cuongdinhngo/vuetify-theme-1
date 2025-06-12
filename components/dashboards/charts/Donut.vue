@@ -58,9 +58,9 @@ function generateChart() {
     },
     options: {
       responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: { position: 'top' },
-        title: { display: true, text: 'Sales Revenue by Product Category' },
         tooltip: {
           enabled: true,
           callbacks: {

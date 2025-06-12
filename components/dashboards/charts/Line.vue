@@ -1,26 +1,43 @@
 <template>
   <v-card variant="elevated" elevation="3" rounded="md" class="pa-2" :height="height">
-    <v-card-title class="text-h6">Monthy Sales</v-card-title>
+    <v-card-title class="text-h6">Monthly Sales</v-card-title>
+    <v-card-subtitle class="text-body-2 text-medium-emphasis">
+      Last 12 months
+    </v-card-subtitle>
     <v-card-text>
       <v-skeleton-loader
         v-if="status === 'pending'"
         type="image, card"
       ></v-skeleton-loader>
-      <canvas
+      <div 
         v-if="status === 'success'"
-        id="salesTrendChart"
-      ></canvas>
+        class="chart-container"
+        :style="{ height: chartHeight }"
+      >
+        <canvas
+          id="salesTrendChart"
+        ></canvas>
+      </div>
     </v-card-text>
   </v-card>
 </template>
+
 <script setup lang="ts">
 import Chart from 'chart.js/auto';
+import { useDisplay } from 'vuetify';
 
 const props = defineProps({
   height: {
     type: [String, Number],
     default: '450'
   }
+});
+
+const { mobile } = useDisplay();
+
+// Computed property for chart height based on screen size
+const chartHeight = computed(() => {
+  return mobile.value ? '300px' : '340px';
 });
 
 const { monthlySales } = useStatistics();
@@ -50,7 +67,6 @@ function generateChart() {
     data: {
       labels: salesData.value.map(item => item.month),
       datasets: [{
-        label: 'Sales Amount ($)',
         data: salesData.value.map(item => item.amount),
         borderColor: '#1976D2',
         backgroundColor: '#82B1FF',
@@ -62,20 +78,23 @@ function generateChart() {
     },
     options: {
       responsive: true,
+      maintainAspectRatio: false,
       plugins: {
-        legend: { position: 'top' },
-        title: { display: true, text: 'Monthly Sales Trend (Last 12 Months)' }
+        legend: { display: false },
       },
-      scales: {
-        y: {
-          beginAtZero: true,
-          title: { display: true, text: 'Sales Amount ($)' }
-        },
-        x: {
-          title: { display: true, text: 'Month' }
-        }
-      }
     }
   });
 }
 </script>
+
+<style scoped>
+.chart-container {
+  position: relative;
+  width: 100%;
+}
+
+.chart-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+</style>

@@ -69,9 +69,9 @@ function generateChart() {
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: { position: 'top' },
-          title: { display: true, text: 'Payment Methods Distribution (Last 12 Months)' }
         }
       }
     });

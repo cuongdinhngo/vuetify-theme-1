@@ -1,10 +1,18 @@
 <template>
   <v-card variant="elevated" elevation="3" rounded="md" class="pa-2" :height="height">
     <v-card-title class="text-h6">Monthly Sales vs User Visits</v-card-title>
+    <v-card-subtitle class="text-body-2 text-medium-emphasis">
+      Last 12 months
+    </v-card-subtitle>
     <v-card-text>
-      <canvas
-        id="mixChart"
-      ></canvas>
+      <div
+        class="chart-container"
+        :style="{ height: chartHeight }"
+      >
+        <canvas
+          id="mixChart"
+        ></canvas>
+      </div>
     </v-card-text>
   </v-card>
 </template>
@@ -35,6 +43,12 @@ const { data: mixData, error } = await useAsyncData(
   }
 );
 
+const { mobile } = useDisplay();
+
+const chartHeight = computed(() => {
+  return mobile.value ? '500px' : '500px';
+});
+
 onMounted(() => generateChart());
 
 function generateChart() {
@@ -63,7 +77,6 @@ function generateChart() {
           backgroundColor: '#1976D2',
           fill: false,
           tension: 0.1,
-          yAxisID: 'y-sales',
           pointRadius: 5
         },
         {
@@ -71,15 +84,14 @@ function generateChart() {
           label: 'User Visits',
           data: mixData.value?.visitData.map(item => item.total),
           backgroundColor: '#4CAF50', // Vuetify success
-          yAxisID: 'y-visits'
         }
       ]
     },
     options: {
       responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: { position: 'top' },
-        title: { display: true, text: 'Sales and User Visits (Last 12 Months)' },
         tooltip: {
           callbacks: {
             label: context => {
@@ -92,48 +104,6 @@ function generateChart() {
           }
         }
       },
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: 'Month',
-            font: { size: 14 }
-          },
-          ticks: { font: { size: 12 } }
-        },
-        'y-sales': {
-          type: 'linear',
-          position: 'left',
-          title: {
-            display: true,
-            text: 'Sales Amount ($)',
-            font: { size: 14 }
-          },
-          ticks: {
-            stepSize: 2000,
-            beginAtZero: true,
-            font: { size: 12 },
-            callback: value => `$${value.toLocaleString()}`
-          },
-          grid: { drawOnChartArea: false } // Avoid overlapping grids
-        },
-        'y-visits': {
-          type: 'linear',
-          position: 'right',
-          title: {
-            display: true,
-            text: 'User Visits',
-            font: { size: 14 }
-          },
-          ticks: {
-            stepSize: 5000,
-            beginAtZero: true,
-            font: { size: 12 },
-            callback: value => value.toLocaleString()
-          },
-          grid: { drawOnChartArea: false }
-        }
-      }
     }
   });
 }

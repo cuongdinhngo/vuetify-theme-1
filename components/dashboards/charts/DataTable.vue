@@ -10,10 +10,11 @@
         v-if="status === 'success'"
         :headers="headers"
         :items="sellers"
-        :items-per-page="5"
+        :items-per-page="pageSize"
         :sort-by="[{ key: 'revenue', order: 'desc' }]"
         density="compact"
         class="elevation-0"
+        :hide-default-footer="sellers.length <= pageSize"
       >
         <template v-slot:item.seller="{ item }">
           <div class="d-flex align-center py-2">
@@ -22,7 +23,7 @@
             </v-avatar>
             <div>
               <div class="font-weight-medium">{{ item.fullName }}</div>
-              <div class="text-caption text-grey">{{ item.position }}</div>
+              <div class="text-caption text-grey text-truncate">{{ item.position }}</div>
             </div>
           </div>
         </template>
@@ -42,6 +43,8 @@ const headers = [
   { title: 'Sale Counts', key: 'saleCounts', sortable: true },
   { title: 'Revenue', key: 'revenue', sortable: true }
 ];
+const pageSize = ref(5);
+const page = ref(1);
 
 const { topSeller } = useStatistics();
 

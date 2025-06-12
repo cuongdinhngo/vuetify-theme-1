@@ -1,15 +1,23 @@
 <template>
   <v-card variant="elevated" elevation="3" rounded="md" class="pa-2" :height="height">
     <v-card-title class="text-h6">User Visits</v-card-title>
+    <v-card-subtitle class="text-body-2 text-medium-emphasis">
+      Last 12 months
+    </v-card-subtitle>
     <v-card-text>
       <v-skeleton-loader
         v-if="status === 'pending'"
         type="image, card"
       ></v-skeleton-loader>
-      <canvas
+      <div 
         v-if="status === 'success'"
-        id="userVisitsChart"
-      ></canvas>
+        class="chart-container"
+        :style="{ height: chartHeight }"
+      >
+        <canvas
+          id="userVisitsChart"
+        ></canvas>
+      </div>
     </v-card-text>
   </v-card>
 </template>
@@ -23,11 +31,18 @@ const props = defineProps({
   }
 });
 
+const { mobile } = useDisplay();
 const { userVisits } = useStatistics();
+
 const { data: userVisitsData, status } = await useAsyncData(
   'user-visits',
   () => userVisits()
 );
+
+// Computed property for chart height based on screen size
+const chartHeight = computed(() => {
+  return mobile.value ? '300px' : '340px';
+});
 
 onMounted(() => generateChart());
 
@@ -69,13 +84,13 @@ function generateChart() {
     },
     options: {
       responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: { position: 'top' },
-        title: { display: true, text: 'User Visits by Device (Last 12 Months)' }
       },
       scales: {
-        x: { stacked: true, title: { display: true, text: 'Month' } },
-        y: { stacked: true, title: { display: true, text: 'Number of Visits' } }
+        // x: { stacked: true, title: { display: true, text: 'Month' } },
+        // y: { stacked: true, title: { display: true, text: 'Number of Visits' } }
         // x: { stacked: true, display: false }, => HIDDEN X-AXIS
         // y: { stacked: true, display: false } => HIDDEN Y-AXIS
       }
