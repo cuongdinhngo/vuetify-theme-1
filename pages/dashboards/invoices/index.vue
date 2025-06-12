@@ -105,11 +105,11 @@
         </template> 
 
         <template v-slot:bottom>
-          <dashboard-section-data-table-bottom
+          <dashboards-section-data-table-bottom
             :totalCount="invoices.count"
             v-model:pageSize="pageSize"
             v-model:page="page"
-          ></dashboard-section-data-table-bottom>
+          ></dashboards-section-data-table-bottom>
         </template>
       </v-data-table>
     </v-card-text>
