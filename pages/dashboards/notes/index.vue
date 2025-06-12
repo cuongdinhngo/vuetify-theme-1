@@ -4,7 +4,7 @@
       v-model="drawer"
       app
       width="300"
-      class="wrapper d-sx-none"
+      class="wrapper"
     >
       <h4 class="d-sx-none py-3 px-3">All Notes</h4>
       <v-text-field
@@ -95,7 +95,7 @@ definePageMeta({
 
 import { noteColors } from '@/composables/useNotes';
 
-const drawer = ref(false);
+const drawer = ref(true);
 const search = ref('');
 
 const { getNotes } = useNotes();
