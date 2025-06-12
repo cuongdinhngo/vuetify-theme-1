@@ -3,6 +3,7 @@
     v-model="drawer"
     app
     :rail="rail"
+    rail-width="70"
     @click="rail = false"
   >
     <!-- Profile Card -->
@@ -64,9 +65,17 @@
       class="main-nav"
       density="compact"
       nav
+      slim
     >
-      <v-list-subheader v-if="!rail">{{ nav.category }}</v-list-subheader>
-      <v-list-subheader v-else class="subheader-rail"><v-icon icon="mdi-dots-horizontal"/></v-list-subheader>
+      <v-list-subheader v-if="!rail" class="text-uppercase font-weight-bold">{{ nav.category }}</v-list-subheader>
+      <v-list-subheader v-else class="justify-center">
+        <v-icon icon="mdi-dots-horizontal"/>
+        <v-tooltip
+          v-if="rail"
+          activator="parent"
+          location="top"
+        >{{ nav.category }}</v-tooltip>
+      </v-list-subheader>
       
       <template v-for="(item, index) in nav.items" :key="index">
         <!-- WITHOUT sub-items -->
@@ -76,7 +85,14 @@
         >
           <template v-slot:prepend>
             <NuxtLink :to="item.to" class="mr-4">
-              <v-icon>{{ item.icon }}</v-icon>
+              <v-icon>
+                {{ item.icon }}
+              </v-icon>
+              <v-tooltip
+                v-if="rail"
+                activator="parent"
+                location="top"
+              >{{ item.title }}</v-tooltip>
             </NuxtLink>
           </template>
 
@@ -99,10 +115,16 @@
           <template v-slot:activator="{ props }">
             <v-list-item
               v-bind="props"
+              @click="rail = false"
             >
               <template v-slot:prepend>
                 <NuxtLink class="mr-4">
                   <v-icon>{{ item.icon }}</v-icon>
+                  <v-tooltip
+                    v-if="rail"
+                    activator="parent"
+                    location="top"
+                  >{{ item.title }}</v-tooltip>
                 </NuxtLink>
               </template>
               <v-list-item-title>{{ item.title }}</v-list-item-title>
@@ -142,18 +164,8 @@ const drawer = defineModel('drawer', {
 </script>
 <style scoped>
 .main-nav {
-  .v-list-subheader {
-    font-weight: bold;
-    color: rgb(var(--v-theme-on-surface));
-    text-transform: uppercase;
-  }
-  .subheader-rail {
-    margin-left: 4px;
-  }
   .v-list-item {
-
     &:hover {
-      /* color: #87dce2 !important; */
       .v-icon {
         color: #87dce2 !important;
       }
@@ -162,14 +174,6 @@ const drawer = defineModel('drawer', {
       }
     }
   }
-}
-
-/**
-The :deep() selector allows you to target deeply nested elements that are generated 
-by Vuetify's internal structure, bypassing Vue's scoped CSS limitations.
-*/
-.main-nav :deep(.v-list-item__prepend > .v-icon ~ .v-list-item__spacer) {
-  width: 10px !important;
 }
 
 .profile {
