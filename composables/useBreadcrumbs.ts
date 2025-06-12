@@ -2,8 +2,8 @@
 import { routes } from '@/config/routes';
 
 const defaultBreadcrumb ={
-  title: 'General',
-  name: '	dashboards',
+  title: 'Home',
+  name: 'home',
   to: { name: 'dashboards' },
   disabled: false
 };
