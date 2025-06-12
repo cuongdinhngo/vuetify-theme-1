@@ -213,22 +213,18 @@ export const headerNav = [
 export const quickLinks = [
   {
     title: 'Dashboard',
-    icon: 'mdi-view-dashboard',
     to: '/dashboard'
   },
   {
     title: 'Reports',
-    icon: 'mdi-chart-bar',
     to: '/reports'
   },
   {
     title: 'Analytics',
-    icon: 'mdi-chart-line',
     to: '/analytics'
   },
   {
     title: 'Settings',
-    icon: 'mdi-cog',
     to: '/settings'
   }
 ];

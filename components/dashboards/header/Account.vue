@@ -3,7 +3,7 @@
     <template v-slot:activator="{ props }">
       <v-avatar
         :image="dashboardImgPath('baby-avatar.webp')"
-        size="small"
+        size="default"
         v-bind="props"
       ></v-avatar>
     </template>

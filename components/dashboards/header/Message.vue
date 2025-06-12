@@ -1,7 +1,11 @@
 <template>
-  <v-menu open-on-hover>
+  <v-menu>
     <template #activator="{ props }">
-      <v-btn icon v-bind="props">
+      <v-btn
+        icon
+        v-bind="props"
+        :size="mobile ? 'small' : 'default'"
+      >
         <v-icon>mdi-message-text</v-icon>
       </v-btn>
     </template>
@@ -62,6 +66,8 @@
 
 <script setup lang="ts">
 import { mockMessages } from '~/config/mock';
+
+const { mobile } = useDisplay();
 
 const messages = computed(() => {
   return mockMessages.map(message => {

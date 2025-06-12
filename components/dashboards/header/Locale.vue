@@ -2,11 +2,15 @@
   <v-menu
   >
     <template #activator="{ props }">
-      <v-btn icon v-bind="props">
+      <v-btn
+        icon
+        v-bind="props"
+        :size="mobile ? 'small' : 'default'"
+      >
         <v-img
           :src="currentFlag"
-          width="35"
-          height="35"
+          :width="mobile ? 27 : 35"
+          :height="mobile ? 27 : 35"
           contain
         ></v-img>
       </v-btn>
@@ -44,6 +48,8 @@
   </v-menu>
 </template>
 <script setup lang="ts">
+const { mobile } = useDisplay();
+
 const languages = [
   { code: 'gb', name: 'English', flag: 'https://flagcdn.com/w40/gb.png' },
   { code: 'fr', name: 'Français', flag: 'https://flagcdn.com/w40/fr.png'  },

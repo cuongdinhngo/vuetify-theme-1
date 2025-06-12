@@ -1,20 +1,21 @@
 <template>
-  <v-menu
-    open-on-hover
-  >
+  <v-menu>
     <template v-slot:activator="{ props }">
       <v-btn
-        icon="mdi-camera-control"
+        icon
         v-bind="props"
+        :size="mobile ? 'small' : 'default'"
       >
+        <v-icon>mdi-camera-control</v-icon>
       </v-btn>
     </template>
 
     <v-card
-      min-height="200px"
-      min-width="800px"
+      class="mx-auto"
+      max-width="500"
     >
-      <v-container>
+      <!-- Header -->
+      <v-container v-if="!mobile">
         <v-row>
           <!-- Main Navigation -->
           <v-col cols="12" md="8">
@@ -68,11 +69,47 @@
           </v-col>
         </v-row>
       </v-container>
+
+      <!-- Fallback for mobile view -->
+      <v-list
+        v-else
+        density="compact"
+        nav
+      >
+        <v-virtual-scroll
+          :items="fullList"
+          height="400"
+          item-height="60"
+        >
+          <template v-slot="{ item }">
+            <v-list-item
+              min-width="335"
+            >
+              <template
+                v-if="item.icon"
+                v-slot:prepend
+              >
+                <v-avatar :color="item.bgColor">
+                  <v-icon :color="item.color">{{ item.icon }}</v-icon>
+                </v-avatar>
+              </template>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+              <v-list-item-subtitle v-if="item.subtitle">{{ item.subtitle }}</v-list-item-subtitle>
+            </v-list-item>
+          </template>
+        </v-virtual-scroll>
+      </v-list>
     </v-card>
   </v-menu>
 </template>
 <script setup lang="ts">
 import { headerNav, quickLinks } from '@/config/menus';
+const { mobile } = useDisplay();
+
+const fullList = [
+  ...headerNav,
+  ...quickLinks
+];
 </script>
 <style scoped>
 /* display the data in 2 columns */
