@@ -1,14 +1,19 @@
 <template>
-  <v-container class="pa-4">
+  <v-container>
     <v-row>
       <!--Security Settings-->
-      <v-col cols="12" md="8">
-        <v-card variant="elevated" elevation="3" rounded="md" class="pa-2">
+      <v-col
+        cols="12"
+        md="8"
+        :class="[mdAndDown ? 'mx-0 px-0' : '']"
+      >
+        <v-card variant="elevated" elevation="3" rounded="md">
           <v-card-text class="pt-0">
-            <v-list>
+            <v-list :lines="false" slim density="compact">
               <v-list-item
                 v-for="(setting, index) in securitySettings"
                 :key="index"
+                :class="[mdAndDown ? 'ma-0 pa-0' : '']"
               >
                 <template #prepend>
                   <v-icon :icon="setting.icon" class="text-primary"></v-icon>
@@ -32,8 +37,12 @@
       </v-col>
 
       <!--Security Settings Image-->
-      <v-col cols="12" md="4">
-        <v-card variant="elevated" elevation="3" rounded="md" class="pa-2">
+      <v-col
+        cols="12"
+        md="4"
+        :class="[mdAndDown ? 'mx-0 px-0' : '']"
+      >
+        <v-card variant="elevated" elevation="3" rounded="md" min-height="300">
           <template #prepend>
             <v-icon class="text-primary" icon="mdi-devices" size="40"></v-icon>
           </template>
@@ -42,10 +51,16 @@
             Manage your devices and sessions
           </v-card-subtitle>
           <v-card-text>
-            <v-list>
+            <v-list
+              :lines="false"
+              slim
+              density="compact"
+              :class="[mdAndDown ? 'ma-0 pa-0' : '']"
+            >
               <v-list-item
                 v-for="(device, index) in ['Device 1', 'Device 2', 'Device 3']"
                 :key="index"
+                :class="[mdAndDown ? 'ma-0 pa-0' : '']"
               >
                 <template #prepend>
                   <v-icon icon="mdi-laptop" class="text-primary"></v-icon>
@@ -66,6 +81,7 @@
   </v-container>
 </template>
 <script setup lang="ts">
+const { mdAndDown } = useDisplay();
 const securitySettings = [
   {
     title: 'Two-Factor Authentication',

@@ -1,7 +1,7 @@
 <template>
-  <v-container class="pa-4">
+  <v-container>
     <v-row>
-      <v-col cols="12" md="10" class="mx-auto">
+      <v-col cols="12" md="10" class="mx-auto ma-0 pa-0">
         <v-card variant="elevated" elevation="3" rounded="md" class="pa-2">
           <v-card-title class="text-h5">Notification Preferences</v-card-title>
           <v-card-text class="pt-0">
@@ -19,10 +19,11 @@
               variant="outlined"
             />
 
-            <v-list>
+            <v-list :lines="false" slim density="compact">
               <v-list-item
                 v-for="(setting, index) in notifiSettings"
                 :key="index"
+                :class="[mdAndDown ? 'ma-0 pa-0' : '']"
               >
                 <template #prepend>
                   <v-icon :icon="setting.icon" class="text-primary"></v-icon>
@@ -48,6 +49,7 @@
   </v-container>
 </template>
 <script setup lang="ts">
+const { mdAndDown } = useDisplay();
 const notifiSettings = [
   {
     title: 'New Features',

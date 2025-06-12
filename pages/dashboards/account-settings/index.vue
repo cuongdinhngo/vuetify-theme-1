@@ -18,7 +18,7 @@
       </template>
 
       <template v-slot:item="{ item }">
-        <v-tabs-window-item :value="item.value" class="pa-4">
+        <v-tabs-window-item :value="item.value" class="ma-0 pa-0">
           <component :is="currentComponent" />
         </v-tabs-window-item>
       </template>
