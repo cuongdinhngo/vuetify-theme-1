@@ -89,7 +89,7 @@ export const dashboardDrawerNav = [
       },
       {
         title: 'Invoices',
-        icon: 'mdi-file-document',
+        icon: 'mdi-invoice-list-outline',
         to: { name: 'dashboards-invoices' },
       },
       {

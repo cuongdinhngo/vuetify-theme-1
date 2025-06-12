@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^9.8.0",
+    "@mdi/font": "^7.4.47",
     "sass-embedded": "^1.89.1"
   }
 }
