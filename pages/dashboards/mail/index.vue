@@ -149,15 +149,21 @@
         <v-card tile class="my-2" color="white" elevation="0">
           <v-card-title class="text-h6">Email Subject</v-card-title>
           <v-card-text>
-            <div>
+            <!-- Email content -->
+            <div class="email-content">
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
               <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </div>
 
-            <div class="mt-4">
+            <!-- Attachments -->
+            <div class="email-attachments mt-4">
               <v-divider></v-divider>
               <p class="text-subtitle-2 text-grey-darken-3 py-3">Attachments</p>
-              <div class="d-flex pb-3">
+              <div :class="[
+                'd-flex',
+                'pb-3',
+                !smAndUp ? 'flex-column' : 'flex-row',
+              ]">
                 <v-list-item
                   v-for="(attachment, index) in ['file1.pdf', 'image2.png', 'document3.docx']"
                   :key="index"
