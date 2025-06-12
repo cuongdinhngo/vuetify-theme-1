@@ -52,17 +52,17 @@ export const dashboardDrawerNav = [
           {
             title: 'Homepage',
             icon: 'mdi-home-outline',
-            to: '/dashboard/notifications'
+            to: { name: 'dashboards' }
           },
           {
             title: 'About Us',
             icon: 'mdi-information-outline',
-            to: '/dashboard/notifications'
+            to: { name: 'dashboards' }
           },
           {
             title: 'Contact Us',
             icon: 'mdi-phone-outline',
-            to: '/dashboard/notifications'
+            to: { name: 'dashboards' }
           },
         ]
       }
