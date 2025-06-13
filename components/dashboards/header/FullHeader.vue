@@ -6,10 +6,10 @@
   >
     <template v-slot:prepend>
       <v-img
-        :src="dashboardImgPath('logolight.svg')"
+        :src="dashboardImgPath('kem_house_logo.png')"
         width="150"
         height="100"
-        contain
+        cover
         class="ml-2 mr-2"
       />
     </template>

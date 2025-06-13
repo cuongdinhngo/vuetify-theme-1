@@ -19,7 +19,7 @@
         <v-row>
           <!-- Main Navigation -->
           <v-col cols="12" md="8">
-            <v-list density="compact" nav class="main-block-nav">
+            <v-list density="compact" nav class="main-block-nav" lines="two">
               <v-list-item
                 v-for="(item, index) in headerNav"
                 :key="index"

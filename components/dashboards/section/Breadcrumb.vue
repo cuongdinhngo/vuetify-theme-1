@@ -12,7 +12,7 @@
     <div class="breadcrumb-right d-none d-sm-flex justify-space-between ga-4">
       <DashboardsSectionYesterdayRevenue
         height="50"
-        width="180"
+        width="190"
       />
       <DashboardsSectionYesterdaySale
         height="50"
