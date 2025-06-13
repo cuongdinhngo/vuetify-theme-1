@@ -1,123 +1,172 @@
 <template>
-  <v-layout>
+  <v-layout class="rounded-lg bg-white">
+    <!-- Filter -->
     <v-navigation-drawer
-      app
+      v-model="drawer"
+      v-if="!smAndDown"
       permanent
       width="250"
-      floating
+      class="border rounded-s-lg"
     >
-      <v-list>
-        <v-list-item
-          v-for="item in ['Home', 'Products', 'Cart', 'Profile']"
-          :key="item"
-          class="ecom-nav-item"
-          link
+      <!-- Category filters-->
+      <ecom-drawer-category-filter
+        v-model:categoryFilter="categoryFilter"
+      />
+
+      <!-- Price Range Filter -->
+      <ecom-drawer-price-range
+        v-model:priceRange="priceRange"
+      />
+
+      <!-- Rating filter-->
+      <ecom-drawer-rating-filter
+        v-model:ratingFilter="ratingFilter"
+      />
+
+      <!-- Clear Filters Button -->
+      <div  class="d-flex justify-center">
+        <v-btn
+          class="mt-4 text-none rounded-pill"
+          color="primary"
+          variant="flat"
+          @click="filters = []; priceRange = [0, 500]"
         >
-          <v-list-item-content>
-            <v-list-item-title>{{ item }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+          Clear Filters
+        </v-btn>
+      </div>
     </v-navigation-drawer>
-    <v-main>
+
+    <!-- Main Content -->
+    <v-main
+      class="border rounded-e-lg"
+    >
       <!-- Featured Products-->
       <v-container class="py-8">
-        <v-row>
-          <v-col cols="12">
-            <h2 class="text-h4 mb-6">Featured Products</h2>
-          </v-col>
-        </v-row>
-      
-        <v-row>
-          <v-col
-            v-for="product in products"
-            :key="product.id"
-            cols="12"
-            sm="6"
-            md="4"
-            lg="3"
-          >
-            <v-card elevation="2" class="h-100 d-flex flex-column">
-              <div class="image-container">
-                <v-img
-                  :src="product.image"
-                  height="250"
-                  cover
-                  class="product-image"
-                />
-              </div>
-              
-              <div class="d-flex align-center justify-space-between pt-3 pb-1 px-4">
-                <v-card-title class="product-title pa-0">
-                  <h6 class="text-h6">{{ product.name }}</h6>
-                </v-card-title>
-                <v-btn
-                  color="primary"
-                  icon
-                  class="add-cart"
-                  @click="addToCart(product)"
-                  size="small"
-                >
-                  <v-icon>mdi-cart</v-icon>
-                </v-btn>
-              </div>
-              
-              <v-card-text class="flex-grow-1 d-flex flex-column pt-0">
-                <div class="text-h6 text-primary font-weight-bold product-price">
-                  ${{ product.price }}
+        <!-- Featured Products Section -->
+        <section class="mb-8">
+          <h2 class="text-h4 mb-6">Featured Products</h2>
+          
+          <v-row>
+            <v-col
+              v-for="product in products"
+              :key="product.id"
+              cols="12"
+              sm="6"
+              md="4"
+              lg="3"
+            >
+              <v-card elevation="2" class="h-100 d-flex flex-column">
+                <div class="image-container">
+                  <v-img
+                    :src="product.image"
+                    height="250"
+                    cover
+                    class="product-image"
+                  />
+                  <v-btn
+                    color="primary"
+                    icon
+                    class="add-cart"
+                    @click="addToCart(product)"
+                    size="small"
+                  >
+                    <v-icon>mdi-cart</v-icon>
+                  </v-btn>
                 </div>
-                <p class="text-body-2 mt-2 description-text">
-                  {{ product.description }}
-                </p>
-              </v-card-text>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
+                
+                <v-card-title class="text-h6 product-title">
+                  {{ product.name }}
+                </v-card-title>
+                
+                <v-card-text class="flex-grow-1 d-flex flex-column">
+                  <div class="text-h6 text-primary font-weight-bold product-price">
+                    ${{ product.price }}
+                  </div>
+                  <p class="text-body-2 mt-2 description-text">
+                    {{ product.description }}
+                  </p>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+        </section>
 
-      <!-- Categories Section -->
-      <v-container class="py-8 bg-grey-lighten-4">
-        <v-row>
-          <v-col cols="12">
-            <h2 class="text-h4 mb-6 text-center">Shop by Category</h2>
-          </v-col>
-        </v-row>
-        
-        <v-row>
-          <v-col
-            v-for="category in categories"
-            :key="category.id"
-            cols="12"
-            sm="6"
-            md="3"
-          >
-            <v-card class="text-center" elevation="1">
-              <v-avatar size="80" class="ma-4">
-                <v-icon size="40" :icon="category.icon" />
-              </v-avatar>
-              <v-card-title class="text-h6">
-                {{ category.name }}
-              </v-card-title>
-              <v-card-actions class="justify-center pb-4">
-                <v-btn variant="outlined" color="primary">
-                  Browse
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-col>
-        </v-row>
+        <!-- Categories Section -->
+        <section class="py-8 bg-grey-lighten-5 rounded">
+          <h2 class="text-h4 mb-6 text-center">Shop by Category</h2>
+          
+          <v-row>
+            <v-col
+              v-for="category in categories"
+              :key="category.id"
+              cols="12"
+              sm="6"
+              md="3"
+            >
+              <v-card class="text-center" elevation="1">
+                <v-avatar size="80" class="ma-4">
+                  <v-icon size="40" :icon="category.icon" />
+                </v-avatar>
+                <v-card-title class="text-h6">
+                  {{ category.name }}
+                </v-card-title>
+                <v-card-actions class="justify-center pb-4">
+                  <v-btn variant="outlined" color="primary">
+                    Browse
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-col>
+          </v-row>
+        </section>
       </v-container>
     </v-main>
   </v-layout>
 </template>
 <script setup lang="ts">
+import type { Categories } from '@/composables/useProducts';
+
 definePageMeta({
   layout: 'ecom',
   title: 'E-commerce Home',
 });
 
+const drawer = ref(true);
+const categoryFilter = ref<Categories[]>([]);
+const priceRange = ref([0, 500]);
+const ratingFilter = ref(0);
+const { smAndDown } = useDisplay();
+
 // Sample data
 const products = ref([
+  {
+    id: 1,
+    name: 'MacBook Air Pro',
+    price: 299.99,
+    image: 'https://picsum.photos/300/250?random=1',
+    description: 'Comfortable and stylish modern chair. Comfortable and stylish modern chair'
+  },
+  {
+    id: 2,
+    name: 'Desk Lamp',
+    price: 89.99,
+    image: 'https://picsum.photos/300/250?random=2',
+    description: 'Adjustable LED desk lamp'
+  },
+  {
+    id: 3,
+    name: 'Coffee Table',
+    price: 199.99,
+    image: 'https://picsum.photos/300/250?random=3',
+    description: 'Glass top coffee table'
+  },
+  {
+    id: 4,
+    name: 'Bookshelf',
+    price: 159.99,
+    image: 'https://picsum.photos/300/250?random=4',
+    description: 'Wooden bookshelf with 5 shelves'
+  },
   {
     id: 1,
     name: 'MacBook Air Pro',
