@@ -4,7 +4,16 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
   app: {
-    baseURL: '/vuetify-theme-1'
+    baseURL: '/vuetify-theme-1',
+    head: {
+      link: [
+        {
+          rel: 'icon',
+          type: 'image/png',
+          href: '/favicon.png' // Path to your favicon
+        }
+      ]
+    }
   },
   modules: ['vuetify-nuxt-module', '@vueuse/nuxt'],
   css: [
