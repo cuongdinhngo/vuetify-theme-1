@@ -34,10 +34,11 @@
   </v-expansion-panels>
 </template>
 <script setup lang="ts">
-import type { categories, Categories } from '@/composables/useProducts';
+import type { Category } from '~/types/category';
+import { categories } from '@/constants/categories';
 
 const categoryFilter = defineModel('categoryFilter', {
-  type: Array<Categories>,
+  type: Array<Category>,
   default: () => [],
 });
 const panel = ref<number[]>([0]);
