@@ -1,48 +1,53 @@
 <template>
-  <v-card elevation="2" class="h-100 d-flex flex-column product-card">
-  <div class="image-container">
-    <v-img
-      :src="product.photo"
-      height="250"
-      cover
-      class="product-image"
-    >
-    </v-img>
-    <v-btn
-      color="primary"
-      icon
-      class="add-cart"
-      @click="addToCart(product)"
-      size="small"
-      elevation="4"
-    >
-      <v-icon>mdi-cart</v-icon>
-    </v-btn>
-  </div>
-  <v-card-title class="text-h6 product-title">
-    {{ product.name }}
-  </v-card-title>
-  <v-card-text class="flex-grow-1 d-flex flex-column">
-    <div class="text-h6 text-primary font-weight-bold product-price">
-      ${{ product.price }}
+  <v-card elevation="2" class="d-flex flex-column product-card">
+    <div class="image-container">
+      <NuxtLink :to="{name: 'ecom-product-id', params: { id: product.id }, query: { category: product.category }}">
+        <v-img
+          :src="product.photo"
+          height="250"
+          cover
+          class="product-image"
+        >
+        </v-img>
+      </NuxtLink>
+      <v-btn
+        color="primary"
+        icon
+        class="add-cart"
+        @click="addToCart(product)"
+        size="small"
+        elevation="4"
+      >
+        <v-icon>mdi-cart</v-icon>
+      </v-btn>
     </div>
-    <p class="text-body-2 mt-2 description-text">
-      {{ product.description }}
-    </p>
-  </v-card-text>
-</v-card>
+    <NuxtLink :to="{name: 'ecom-product-id', params: { id: product.id }, query: { category: product.category }}">
+      <v-card-title class="text-h6 product-title">
+        {{ product.name }}
+      </v-card-title>
+    </NuxtLink>
+    <NuxtLink :to="{name: 'ecom-product-id', params: { id: product.id }, query: { category: product.category }}">
+      <v-card-text class="flex-grow-1 d-flex flex-column">
+        <div class="text-h6 text-primary font-weight-bold product-price">
+          ${{ product.price }}
+        </div>
+        <p class="text-body-2 mt-2 description-text">
+          {{ product.description }}
+        </p>
+      </v-card-text>
+    </NuxtLink>
+  </v-card>
 </template>
 <script setup lang="ts">
+import type { Product } from '~/types/product';
 const props = defineProps({
   product: {
-    type: Object as PropType<{
-      id: number;
-      name: string;
-      price: number;
-      description: string;
-      photo: string;
-    }>,
+    type: Object as () => Product,
     required: true
+  },
+  height: {
+    type: Number,
+    default: 100
   }
 });
 

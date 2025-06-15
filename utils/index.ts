@@ -48,3 +48,7 @@ export const formatTimeAgo = (timestamp: string | Date) => {
   const years = Math.floor(days / 365);
   return `${years}y`;
 };
+
+export const getRandomPhoto = (id: number, {width, height}: {width: number, height: number}) => {
+  return `https://picsum.photos/id/${id}/${width}/${height}`;
+}
