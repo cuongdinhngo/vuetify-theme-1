@@ -1,7 +1,7 @@
 <template>
   <div class="banner-section">
     <v-img
-      src="https://picsum.photos/1100/300"
+      src="https://picsum.photos/id/26/1100/300"
       height="400"
       cover
       class="banner-image"
