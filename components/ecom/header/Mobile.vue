@@ -16,12 +16,12 @@
       <v-btn variant="tonal" icon size="small">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
-      <v-btn variant="tonal" icon size="small">
-        <v-icon>mdi-basket-outline</v-icon>
-      </v-btn>
-      <v-btn variant="tonal" icon size="small">
-        <v-icon>mdi-account</v-icon>
-      </v-btn>
+      <BtnCart />
+      <BtnAccount />
     </div>
   </v-app-bar>
 </template>
+<script setup lang="ts">
+import BtnAccount from './BtnAccount.vue';
+import BtnCart from './BtnCart.vue';
+</script>

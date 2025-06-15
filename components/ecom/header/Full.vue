@@ -24,13 +24,13 @@
           hide-details
           width="300"
         />
-        <v-btn variant="tonal" color="primary" icon size="small">
-          <v-icon color="white">mdi-basket-outline</v-icon>
-        </v-btn>
-        <v-btn variant="tonal" color="primary" icon size="small">
-          <v-icon color="white">mdi-account</v-icon>
-        </v-btn>
+        <BtnAccount />
+        <BtnCart />
       </div>
     </v-container>
   </v-app-bar>
 </template>
+<script setup lang="ts">
+import BtnAccount from './BtnAccount.vue';
+import BtnCart from './BtnCart.vue';
+</script>
